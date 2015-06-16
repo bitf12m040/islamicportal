@@ -1,0 +1,101 @@
+﻿@using IslamicPorta.Models
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+
+        <script src="~/Scripts/jquery-1.9.1.js"></script>
+        <script src="~/Scripts/jquery-1.11.3.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/MyStyle.css" rel="stylesheet" />
+        <script src="~/Scripts/bootstrap.js"></script>
+        
+        @Scripts.Render("~/bundles/modernizr")
+      
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="nav navbar-header">
+                    <img class="navbar-brand img-circle" src="~/images/logoo.PNG"/>
+                    <a href="#" style="font-family: fantasy" class="navbar-brand">Islamic Portal</a>
+                </div>
+                
+                <div>
+                    <ul class="nav navbar-nav navbar-right" >
+                        @{
+                            admin admin = (admin) Session["adminsession"];
+                            if (admin == null)
+                            {
+
+                                <li>@Html.ActionLink("Admin", "AdminLogin", "Admin")</li>
+                                <li>@Html.ActionLink("FAQ's", "FAQ", "Home")</li>
+                                <li>@Html.ActionLink("Users", "Users", "Account")</li>
+
+                                user u = (user) Session["usersession"];
+                                if (u == null)
+                                {
+                                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                                    <li>@Html.ActionLink("Sign Up", "SignUp", "Account")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                                }
+
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Ask Question", "AskQuestion", "Home")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("FAQ's", "FAQ", "Admin")</li>
+                                <li>@Html.ActionLink("DeleteUser", "Users", "Admin")</li>
+                                <li>@Html.ActionLink("DeleteQuestion", "Question", "Admin")</li>
+                                <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                            }
+}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        
+
+        <div class="container">
+            @RenderBody()
+        </div>
+        
+        @*/////////////////////////..................footer..........................*@
+
+        <div style="background-color:mintcream;" class="row" id="footer">
+            <div id="bgImg" style="font-size:17px; font-weight:bold; color:lightgray; font-family:Narkisim; clear:both; text-align:center">
+                Enterprize Application Development
+            </div>
+
+            <br />
+
+            <div class="col-sm-4" style="align-self: center; margin-left: 40%">
+                <a href="https://www.facebook.com/sanaullah.suny.7" target="_blank"><img src="~/images/footer/facebook1.png" width="60" height="60"></a>&nbsp&nbsp&nbsp
+                <a href="https://twitter.com/Attarisuny" target="_blank"><img src="~/images/footer/twiter1.png" width="60" height="60"></a>&nbsp&nbsp&nbsp
+                <a href="#" target="_blank"><img src="~/images/footer/google1.png" width="60" height="60"></a>&nbsp&nbsp&nbsp
+                <a href="mailto:suny.attari@yahoo.com" target="_blank"><img src="~/images/footer/yahoo1.png" width="60" height="60"></a>
+            </div>
+            <div class="col-sm-2"></div>
+            <div style="background-color:gray; font-size:17px; font-weight:bold; font-family:Narkisim; clear:both; text-align:center">
+                &copy Copyright - All Rights Reserved by <a href="https://www.facebook.com/sanaullah.suny.7" target="_blank"><b style="color:yellow;">Sana Ullah Attari</b></a> &reg
+            </div>
+        </div>
+
+        
+        @*/////////////////..............end footer.........................................*@
+        
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+
+
+</html>

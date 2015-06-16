@@ -1,0 +1,11 @@
+﻿#footer {
+            font-size: 17px;
+            font-weight: bold;
+            font-family: Narkisim;
+            color: white;
+            clear: both;
+            text-align: left;
+            padding: 5px;
+            background-image: url(../images/footer/bg.jpg);
+            opacity: 1;
+        }

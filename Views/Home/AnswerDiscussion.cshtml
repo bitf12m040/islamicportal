@@ -1,0 +1,74 @@
+﻿@using IslamicPorta.Models
+@model List<answer>
+           
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AnswerDiscussion";
+}
+
+<h2>AnswerDiscussion</h2>
+
+
+<div class="container">
+    @{
+        question q = ViewBag.selectedQuestion;
+        <div class="well col-md-9" style="margin-left: 5%; background-color: #fff9d4">
+            <form class="form-horizontal" role="form">
+                <div>
+                    <p><h3>Here is the question</h3></p>
+                    <p>Title: @q.title</p>posted on @q.date
+                    <textarea class="form-control" readonly="readonly" cols="50" rows="7" name="answer">@q.userquestion</textarea>
+                    <br />
+                    
+                    
+                </div>
+            </form>
+        </div>
+    
+        <div class="well col-md-9" style="margin-left: 5%; background-color: #fff9d4">
+            <form class="form-horizontal" role="form">
+                <div>
+                    
+                    @for (int i=0; i<Model.Count; i++)
+                    {
+                        answer a = Model[i];
+                        <p><h5 >Answer: @(i + 1)</h5> <br/> posted on @a.ansdate</p>
+                        <textarea class="form-control" readonly="readonly" cols="50" rows="7" name="answer">@a.answer1</textarea>
+                        <br />
+                        
+                    }
+                </div>
+            </form>
+        </div>
+        
+        user u = (user)Session["usersession"];
+        admin ad = (admin) Session["adminsession"];
+        if (u != null || ad != null)
+        {
+            <div id="answerr" class="col-md-9 well" style="margin-left: 5%">
+                <form class="form-horizontal" action="/Home/SaveAnswer" method="POST" role="form">
+                    <div>
+                        <div class="col-md-9">
+                            <textarea cols="70" class="form-control" rows="5" name="answer" placeholder="Enter your answer please"></textarea>
+                        </div>
+                        <br />
+                        <div class="col-md-9">
+                            <br /><br />
+                            <input type="submit" class="btn btn-primary" value="Post answer" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+        
+        else
+        {
+            <div class="alert alert-warning col-md-7" style="margin-left: 20%" role="alert">
+                <p class="text-center"> <strong>You must be logged in before posting answer on Islamic Portal</strong></p>
+                <p class="text-center"> click here to @Html.ActionLink("Login", "Login", "Account")</p>
+            </div>
+        }
+    }
+</div>

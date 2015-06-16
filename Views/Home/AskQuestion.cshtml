@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "AskQuestion";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using IslamicPorta.Models
+@model user
+
+
+<div class="container">
+    <div class="text-center">
+              <h2 class="text-success"><strong>Islamic Portal</strong></h2><br />
+          </div>
+
+    @{
+        user u = (user) Session["usersession"];
+        if (u != null)
+        {
+            <form class="form-horizontal well" style="background-color: #43C6DB" role="form" action="/Home/PostQuestion" method="POST">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Title</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" name="title" required="" id="question-title" placeholder="please enter title..be specific" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Question</label>
+                    <div class="col-md-5">
+                        <textarea class="form-control" name="question" required="" cols="55" rows="5" placeholder="please enter your Islamic question here"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-left: 25%">
+                    <input type="submit" class="btn btn-primary" id="btn-post-question" value="Post my Question" />
+                    <input type="button" value="cancel" class="btn btn-danger" onclick=" cancel() " style="margin-right: 5%" />
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-warning col-md-7" style="margin-left: 20%" role="alert">
+                <p class="text-center"> <strong>You must be logged in before asking question on Islamic Portal</strong></p>
+                <p class="text-center"> click here to @Html.ActionLink("Login", "Login", "Account")</p>
+            </div>
+        }
+    }
+</div>
+
+<script>
+    function cancel() {
+        window.location = "http://localhost:34579/Question/AskQuestion";
+    }
+</script>

@@ -1,0 +1,21 @@
+﻿@using IslamicPorta.Models
+@model List<question>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    @foreach (question q in Model.Reverse<question>())
+    {
+        <div class="well col-md-9" style="margin-left: 5%; background-color: #fff9d4">
+        <p>Title: <a href="/Admin/AnswerDiscussion/@q.qid">@q.title</a></p>
+            <form class="form-horizontal" action="/Admin/DeleteQuestion/@q.qid" method="POST">
+                <p>Posted on @q.date </p>
+                <textarea class="form-control" draggable="false" readonly="readonly" cols="50" rows="7">Question: @q.userquestion</textarea>
+
+
+                <input type="submit" value="Delete Question" class="form-group btn pull-right btn-danger" />
+            </form>
+        </div>
+    }
+
+</div>

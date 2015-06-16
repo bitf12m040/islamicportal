@@ -1,0 +1,18 @@
+﻿@using IslamicPorta.Models
+@model List<answer>
+@{
+    ViewBag.Title = "LoadComments";
+}
+
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    answer a = Model[i];
+    <br />
+    <div>
+        <p><h5>Answer: @(i + 1)</h5>  posted on @a.ansdate</p>
+        <textarea class="form-control" draggable="false" readonly="readonly" cols="50" rows="7" name="answer">@a.answer1</textarea>
+        <input type="hidden" name="id" id="comentId" value="@a.aid" />
+        <input type="button" value="Delete Answer" id="deletAnswer" class="form-group btn-danger pull-right" />
+    </div>
+}

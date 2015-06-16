@@ -1,0 +1,23 @@
+﻿@using IslamicPorta.Models
+@model List<user>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Users";
+}
+
+
+<div class="container">
+        @foreach (user u in Model.Reverse<user>())
+        {
+            string s = u.uid + ".jpg";
+            <div class=" col-sm-3">
+                <div class="well" style="background-color: #FDEEF4">
+                    <img class="img-circle img-responsive" width="70%" height="70%" src="~/images/profilePics/@s"/>
+                    <p >@u.name</p>
+                    <p >@u.city</p>
+                </div>
+            </div>
+        }
+</div>

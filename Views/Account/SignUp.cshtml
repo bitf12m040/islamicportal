@@ -1,0 +1,71 @@
+﻿@model IslamicPorta.Models.user
+@using IslamicPorta.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css"/>
+    <script src="~/Script/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+}
+
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="~/Scripts/jquery-ui.css" />
+    <script src="~/Scripts/jquery-1.8.2.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+</head>
+
+<div class="container well" style="background-color: #EDC9AF">
+    <div class="text-center">
+        <h2 class="text-success" style="font-family: cursive">
+            <strong>Sign Up for Islamic Portal</strong>
+        </h2>
+    </div><br />
+
+    @using (Html.BeginForm("AddUser", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        <div class="form-group col-md-5" style="margin-left: 30%">
+            @Html.TextBoxFor(x => x.name, new { @class = "form-control", name = "name", placeholder = "Enter your name" })
+            <span style="color: red">@Html.ValidationMessageFor(x=>x.name)</span>
+        </div>
+
+        <div class="col-md-5 form-group" style="margin-left: 30%">
+            @Html.TextBoxFor(x => x.city, new { @class = "form-control", name = "city",  placeholder = "Enter your city e.g. Sahiwal" })
+            <span style="color: red">@Html.ValidationMessageFor(x => x.city)</span>
+        </div>
+        <div class="form-group col-md-5" style="margin-left: 30%">
+            @Html.TextBoxFor(x => x.email, new { @class = "form-control", type = "email", name = "email",  placeholder = "abc@example.com" })
+            <span style="color: red">@Html.ValidationMessageFor(x => x.email)</span>
+        </div>
+        <div class="col-md-5 form-group" style="margin-left: 30%">
+            @Html.TextBoxFor(x => x.password, new { @class = "form-control", type = "password", name = "password", placeholder = "Enter your password" })
+            <span style="color: red">@Html.ValidationMessageFor(x => x.password)</span>
+        </div>
+        <div class="form-group col-md-5" style="margin-left: 30%">
+            @Html.TextBoxFor(x => x.confirm, new { @class = "form-control", type="password",  name = "confirm", placeholder = "confirm your password" })
+            <span style="color: red">@Html.ValidationMessageFor(x => x.confirm)</span>
+        </div>
+        <div class="form-group col-md-5" style="margin-left: 30%">
+            Upload Profile Picture: <input type="file" name="image" required="required" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit"  style="margin-left: 33%" class="btn btn-primary" />
+            <input type="button" value="cancel" class="btn btn-danger" onclick=" cancel() " style="margin-right: 3%" />
+        </div>
+    }
+</div>
+
+<script>
+    function cancel() {
+        window.location = "http://localhost:34579/Account/SignUp";
+    }
+</script>

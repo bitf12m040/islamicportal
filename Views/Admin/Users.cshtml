@@ -1,0 +1,27 @@
+﻿@using IslamicPorta.Models
+@model List<IslamicPorta.Models.user>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Users";
+}
+
+
+<div class="container">
+    @foreach (user u in Model.Reverse<user>())
+    {
+        string s = u.uid + ".jpg";
+        <div class=" col-sm-3">
+            <div class="well" style="background-color: #B6B6B4">
+                <img class="img-circle img-responsive" src="~/images/profilePics/@s" />
+                <p>@u.name</p>
+                <p>@u.city</p>
+                <br/>
+                <form class="form-horizontal" action="/Admin/DeleteUser/@u.uid" method="POST">
+                    <input type="submit" value="Delete user" class="form-group btn-danger btn" />
+                </form>
+            </div>
+        </div>
+    }
+</div>

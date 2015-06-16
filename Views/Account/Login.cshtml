@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using IslamicPorta.Models
+@model user
+
+<div class="container well well-sm" style="background-color: #FDEEF4">
+    <div class="text-center">
+        <img src="~/images/islam-logo.jpg" />
+        <h2 class="text-success"><strong>Islamic Portal</strong></h2><br />
+    </div>
+
+    @{
+        if (ViewBag.loginAgain != null)
+        {
+            <div class="alert alert-warning col-md-7" style="margin-left: 20%" role="alert">
+                <p class="text-center"><strong>Your email or password is not correct</strong></p>
+            </div>
+        }
+    }
+    <div>
+            @using (Html.BeginForm("Authenticate", "Account", FormMethod.Post, new{@class="form-horizontal", role="form"}))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(x => x.email, new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(x => x.email, new { @class = "form-control", type="email", name = "email", required = "", placeholder = "abc@example.com" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(x => x.password, new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(x=> x.password, new{@class="form-control", name="password", type="password", required="", placeholder="enter your password"})
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-left: 25%">
+
+                    <input type="submit" value="Login" class="btn btn-success" />
+                    <input type="button" value="cancel" class="btn btn-danger" onclick=" cancel() " style="margin-right: 3%" />
+                    @Html.ActionLink("Not Registerd? Sign Up", "SignUp", "Account")
+                </div>
+            }
+    </div>
+</div>
+
+<script>
+    function cancel() {
+        window.location = "http://localhost:34579/Account/Login";
+    }
+</script>

@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IslamicPorta.Models.admin
+<div class="container well" style="background-color: #FDD7E4">
+    <div class="text-center">
+        <img src="~/images/islam-logo.jpg" />
+        <h2 class="text-success"><strong>Islamic Portal</strong></h2><br />
+    </div>
+
+    @{
+        if (ViewBag.loginAgain != null)
+        {
+            <div class="alert alert-warning col-md-7" style="margin-left: 20%" role="alert">
+                <p class="text-center"><strong>Your email or password is not correct</strong></p>
+            </div>
+        }
+    }
+    <div>
+        <div class="alert alert-warning col-md-7" style="margin-left: 20%" role="alert">
+            <p class="text-center"> <strong>To Login As Admin your user name, email and password must be correct</strong></p>
+        </div>
+
+        @using (Html.BeginForm("Authenticate", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.aname, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.aname, new { @class = "form-control", name = "name", placeholder = "Your user name as Admin" })
+                    <span style="color: red"> @Html.ValidationMessageFor(x => x.aname) </span>
+
+                 </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.aemail, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.aemail, new { @class = "form-control", name = "email", placeholder = "abc@example.com" })
+                    <span style="color: red"> @Html.ValidationMessageFor(x=>x.aemail) </span>
+
+                 </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.apassword, new { @class = "control-label col-md-3" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(x => x.apassword, new { @class = "form-control", type = "password", name = "password", required = "", placeholder = "enter your password" })
+                    <span style="color: red"> @Html.ValidationMessageFor(x => x.apassword) </span>
+
+                
+                  </div>
+            </div>
+            <div class="form-group" style="margin-left: 25%">
+
+                <input type="submit" value="Login" class="btn btn-success" />
+                <input type="button" value="cancel" class="btn btn-danger" onclick=" cancel() " style="margin-right: 3%" />
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function cancel() {
+        // window.location = "http://localhost:34579/Home/FAQ";
+    }
+</script>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
